@@ -14,7 +14,10 @@ function CityList(connection) {
 
 CityList.prototype = {
   showCities: function(req, res) {
-    task.find({}, function foundTasks(err, items) {
+    city.find({name: /./}, function foundTasks(err, items) {
+	  if (err) {
+		console.log(err);
+	  }
       res.render('index',{title: 'City Bingo', cities: items})
     });
   },
@@ -22,10 +25,10 @@ CityList.prototype = {
 
   addCity: function(req,res) {
     var item = req.body.item;
-    city = new task();
-    city.name = item.name;
-    city.description = item.description;
-    city.save(function savedTask(err){
+    newCity = new task();
+    newCity.name = item.name;
+    newCity.description = item.description;
+    newCity.save(function savedTask(err){
       if(err) {
         throw err;
       }

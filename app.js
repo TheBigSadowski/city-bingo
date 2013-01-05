@@ -29,7 +29,11 @@ app.configure('production', function(){
 
 // Routes
 
-app.get('/', routes.index);
+var CityList = require('./routes/citylist');
+var cityList = new CityList('mongodb://TheBigSadowski:Pizza12^@ds045097.mongolab.com:45097/bingo');
+
+//app.get('/', routes.index);
+app.get('/', cityList.showCities.bind(cityList));
 
 app.listen(3000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

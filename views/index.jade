@@ -3,29 +3,20 @@ form(action="/completetask", method="post")
   table(border="1")
     tr
       td Name
-      td Category
-      td Date
-      td Complete
-    each task in tasks
+    each city in cities
       tr
-        td #{task.itemName}
-        td #{task.itemCategory}
-        - var day   = task.itemDate.getDate();
-        - var month = task.itemDate.getMonth() + 1;
-        - var year  = task.itemDate.getFullYear();
-        td #{month + "/" + day + "/" + year}
+        td #{city.name}
         td
-          input(type="checkbox", name="#{task._id}", value="#{!task.itemCompleted}", checked=task.itemCompleted)
-  input(type="submit", value="Update tasks")
+          a(href="/cities/#{city.url}") manage
 hr
-form(action="/addtask", method="post")
+form(action="/addcity", method="post")
   table(border="1") 
     tr
       td Item Name: 
       td 
         input(name="item[name]", type="textbox")
     tr
-      td Item Category: 
+      td Description: 
       td 
-        input(name="item[category]", type="textbox")
-  input(type="submit", value="Add item")
+        input(name="item[description]", type="textbox")
+  input(type="submit", value="Add city")
